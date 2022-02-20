@@ -181,7 +181,8 @@ class Common(Configuration):
     }
 
     # Custom user app
-    AUTH_USER_MODEL = 'users.User'
+    AUTH_USER_MODEL = 'users.User'           # Django 관리자
+    AUTH_ADMIN_MODEL = 'stats.Administrator' # Drone 관리자
 
     # Django Rest Framework
     REST_FRAMEWORK = {

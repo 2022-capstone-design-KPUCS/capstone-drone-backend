@@ -5,20 +5,20 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from faker import Faker
 import factory
-from ..models import User
-from .factories import UserFactory
+from ..models import Administrator, Flight, Deck, Drone
+from .factories import AdminFactory, FlightFactory, DeckFactory, DroneFactory
 
 fake = Faker()
 
 
-class TestUserListTestCase(APITestCase):
+class TestAdminListTestCase(APITestCase):
     """
-    Tests /users list operations.
+    Tests /admin list operations.
     """
 
     def setUp(self):
         self.url = reverse('user-list')
-        self.user_data = factory.build(dict, FACTORY_CLASS=UserFactory)
+        self.user_data = factory.build(dict, FACTORY_CLASS=AdminFactory)
 
     def test_post_request_with_no_data_fails(self):
         response = self.client.post(self.url, {})
@@ -28,18 +28,18 @@ class TestUserListTestCase(APITestCase):
         response = self.client.post(self.url, self.user_data)
         eq_(response.status_code, status.HTTP_201_CREATED)
 
-        user = User.objects.get(pk=response.data.get('id'))
+        user = Administrator.objects.get(pk=response.data.get('id'))
         eq_(user.username, self.user_data.get('username'))
         ok_(check_password(self.user_data.get('password'), user.password))
 
 
-class TestUserDetailTestCase(APITestCase):
+class TestAdminDetailTestCase(APITestCase):
     """
-    Tests /users detail operations.
+    Tests /admin detail operations.
     """
 
     def setUp(self):
-        self.user = UserFactory()
+        self.user = AdminFactory()
         self.url = reverse('user-detail', kwargs={'pk': self.user.pk})
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.user.auth_token}')
 
@@ -53,5 +53,5 @@ class TestUserDetailTestCase(APITestCase):
         response = self.client.put(self.url, payload)
         eq_(response.status_code, status.HTTP_200_OK)
 
-        user = User.objects.get(pk=self.user.id)
+        user = Administrator.objects.get(pk=self.user.id)
         eq_(user.first_name, new_first_name)
