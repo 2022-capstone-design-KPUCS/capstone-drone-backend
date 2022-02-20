@@ -1,28 +1,6 @@
 from rest_framework import serializers
 
-from .models import Administrator, Flight, Deck, Drone
-
-
-class AdministratorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Administrator
-        fields = ('id', 'username', 'first_name', 'last_name', )
-        read_only_fields = ('username',)
-
-class CreateAdministratorSerializer(serializers.ModelSerializer):
-
-    def create(self, validated_data):
-        # call create_user on administrator object. Without this
-        # the password will be stored in plain text.
-        admin = Administrator.objects.create_user(**validated_data)
-        return admin
-
-    class Meta:
-        model = Administrator
-        fields = ('id', 'username', 'password', 'first_name', 'last_name', 'email', 'auth_token',)
-        read_only_fields = ('auth_token',)
-        extra_kwargs = {'password': {'write_only': True}}
-
+from .models import Flight, Deck, Drone
 
 class FlightSerializer(serializers.ModelSerializer):
     class Meta:

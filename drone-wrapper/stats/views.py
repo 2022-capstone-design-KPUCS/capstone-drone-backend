@@ -7,19 +7,9 @@ from rest_framework import viewsets, mixins
 from rest_framework.permissions import AllowAny
 
 from .permissions import IsUserOrReadOnly
-from .models import Administrator, Flight, Deck, Drone
-from .serializers import AdministratorSerializer, FlightSerializer, DeckSerializer, DroneSerializer
-from .serializers import CreateAdministratorSerializer, CreateFlightSerializer, CreateDeckSerializer, CreateDroneSerializer
-
-class AdministratorViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
-    queryset = Administrator.objects.all()
-    serializer_class = AdministratorSerializer
-    permission_classes = (IsUserOrReadOnly,)
-
-class AdministratorCreateViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    queryset = Administrator.objects.all()
-    serializer_class = CreateAdministratorSerializer
-    permission_classes = (IsUserOrReadOnly,)
+from .models import Flight, Deck, Drone
+from .serializers import FlightSerializer, DeckSerializer, DroneSerializer
+from .serializers import CreateFlightSerializer, CreateDeckSerializer, CreateDroneSerializer
 
 
 class FlightViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
@@ -52,7 +42,7 @@ class DroneViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.
     permission_classes = (AllowAny,)
 
 
-class DroneCreateViewSet(mixins.CreateModeMixin, viewsets.GenericViewSet):
+class DroneCreateViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Drone.objects.all()
     serializer_class = CreateDroneSerializer
     permission_classes = (AllowAny,)

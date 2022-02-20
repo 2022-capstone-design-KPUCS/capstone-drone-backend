@@ -6,23 +6,7 @@ from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from rest_framework.authtoken.models import Token
-
-class Administrator(AbstractUser):
-    """
-    A model of user who can log into the admin interface. Essentially different from django admin user.
-    장고 어드민 사용자와는 다른 사용자입니다. 드론 관리자 인터페이스에 로그인 할 수 있는 관리자 사용자 모델 입니다.
-    """
-
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    
-    def __str__(self):
-        return self.username
-
-@receiver(post_save, sender=settings.AUTH_ADMIN_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
-
+from ..users.models import User
 class Flight(models.Model):
     """
     A model of flight instances. Records of each flight information.
@@ -52,7 +36,7 @@ class Drone(models.Model):
     드론 객체의 모델.
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    admin_id = models.ForeignKey(Administrator, on_delete=models.CASCADE)
+    admin_id = models.ForeignKey(User, on_delete=models.CASCADE)
     surveilance_area = models.TextField(null=True) # JSON-serialized (text) version of list of lat, lng decimals
     flight = models.ManyToManyField(Flight)
     deck = models.ManyToManyField(Deck)
