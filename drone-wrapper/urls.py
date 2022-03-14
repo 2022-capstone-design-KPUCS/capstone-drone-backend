@@ -17,6 +17,9 @@ router.register(r'decks', DeckViewSet)
 router.register(r'decks', DeckCreateViewSet)
 router.register(r'drones', DroneViewSet)
 router.register(r'drones', DroneCreateViewSet)
+router.register(r'flightrecords', FlightRecordViewSet)
+router.register(r'flightrecords', FlightRecordCreateViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
