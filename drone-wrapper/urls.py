@@ -6,19 +6,15 @@ from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from .stats.views import *
-from .users.views import UserViewSet, UserCreateViewSet
+from .users.views import UserViewSet
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r'users', UserCreateViewSet)
 router.register(r'flights', FlightViewSet)
-router.register(r'flights', FlightCreateViewSet)
 router.register(r'decks', DeckViewSet)
-router.register(r'decks', DeckCreateViewSet)
 router.register(r'drones', DroneViewSet)
-router.register(r'drones', DroneCreateViewSet)
 router.register(r'flightrecords', FlightRecordViewSet)
-router.register(r'flightrecords', FlightRecordCreateViewSet)
+
 
 
 urlpatterns = [
