@@ -9,13 +9,17 @@ Supports registering, viewing, and updating user accounts.
 
 Parameters:
 
-Name       | Type   | Required | Description
------------|--------|----------|------------
-username   | string | Yes      | The username for the new user.
-password   | string | Yes      | The password for the new user account.
-first_name | string | No       | The user's given name.
-last_name  | string | No       | The user's family name.
-email      | string | No       | The user's email address.
+Name        | Type   | Required | Description
+------------|--------|----------|------------
+username    | string | Yes      | The username for the new user.
+password    | string | Yes      | The password for the new user account.
+first_name  | string | No       | The user's given name.
+last_name   | string | No       | The user's family name.
+email       | string | No       | The user's email address.
+is_staff    | bool   | No       | Whether the user is a api admin.
+is_active   | bool   | No       | Whether the user is active.
+is_superuser| bool   | No       | Whether the user is a system administrator.
+date_joined | string | No       | The date the user was created.
 
 *Note:*
 
