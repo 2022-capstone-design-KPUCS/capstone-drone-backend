@@ -10,3 +10,8 @@ nav:
   - API:
     - Authentication: 'api/authentication.md'
     - Users: 'api/users.md'
+    - Drones: 'api/drones.md'
+    - Decks: 'api/decks.md'
+    - Flights: 'api/fligts.md'
+    - FlightRecords: 'api/flights_records.md'
+
