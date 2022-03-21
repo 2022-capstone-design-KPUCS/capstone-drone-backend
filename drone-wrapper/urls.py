@@ -9,11 +9,12 @@ from .stats.views import *
 from .users.views import UserViewSet
 
 router = DefaultRouter()
-router.register(r'users', UserViewSet)
+# router.register(r'users', UserViewSet)
 router.register(r'flights', FlightViewSet)
 router.register(r'decks', DeckViewSet)
 router.register(r'drones', DroneViewSet)
 router.register(r'flightrecords', FlightRecordViewSet)
+
 
 
 
@@ -22,7 +23,8 @@ urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
     # the 'api-root' from django rest-frameworks default router
     # http://www.django-rest-framework.org/api-guide/routers/#defaultrouter
     re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False)),
