@@ -4,6 +4,7 @@ Django==4.0.2
 django-configurations==2.3.1
 gunicorn==20.1.0
 newrelic==7.2.4.171
+aiohttp
 djoser
 
 # For the persistence stores
@@ -22,7 +23,7 @@ django-filter==21.1
 # Developer Tools
 ipdb==0.13.9
 ipython==8.0.1
-mkdocs==1.2.3
+mkdocs==1.2.4
 flake8==4.0.1
 
 # Testing
