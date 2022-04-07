@@ -17,7 +17,7 @@ class FlightRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = FlightRecord
         fields = '__all__'
-        
+
 class FlightSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Flight.objects.create(**validated_data)
@@ -40,5 +40,4 @@ class DroneSerializer(serializers.ModelSerializer):
         validated_data['admin'] = self.context['request'].user
         drone = Drone.objects.create(**validated_data)
         return drone
-
 

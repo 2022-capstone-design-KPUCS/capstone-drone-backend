@@ -43,7 +43,7 @@ class Flight(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     flight_record_url = models.URLField(max_length=200, blank=True)
     flight_record = models.ForeignKey(FlightRecord, on_delete=models.CASCADE, null=True)
-    flight_path = models.TextField(blank=True)
+    flight_path = models.JSONField(null=True)
     auto_start_time = models.DateTimeField(blank=True)
     auto_end_time = models.DateTimeField(blank=True)
 
@@ -60,4 +60,3 @@ class Drone(models.Model):
     surveilance_area = models.TextField(null=True) # JSON-serialized (text) version of list of lat, lng decimals
     drone_alias = models.CharField(max_length=200, null=True, unique=True)
     is_active = models.BooleanField(default=False)
-
