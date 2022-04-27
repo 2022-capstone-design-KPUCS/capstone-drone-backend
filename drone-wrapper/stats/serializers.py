@@ -20,7 +20,10 @@ class FlightRecordSerializer(serializers.ModelSerializer):
 
 class FlightSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
-        return Flight.objects.create(**validated_data)
+        flight = Flight.objects.create(**validated_data)
+        Drone.objects.update(flight=flight.id)
+        return flight
+
 
     class Meta:
         model = Flight
