@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    
+    token = models.CharField(max_length=200, null=True)
     def get_full_name(self) -> str:
         return super().get_full_name()
 
