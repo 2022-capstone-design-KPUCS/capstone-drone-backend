@@ -13,12 +13,12 @@ class DroneViewSet(viewsets.ModelViewSet):
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
 
     def get_queryset(self):
-        print("USER", self.request.user)
+        print("USER", self.request)
         if self.request.user == 'AnonymousUser':
-            user = self.request.user
-            filtered_content = Drone.objects.filter(admin_id=user)
-        else:
             filtered_content = Drone.objects.all()
+        else:
+            user = self.request.user
+            filtered_content = Drone.objects.filter(admin=user)
         return filtered_content
 
 
@@ -26,7 +26,15 @@ class FlightViewSet(viewsets.ModelViewSet):
     queryset = Flight.objects.all()
     serializer_class = FlightSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-
+    
+    def get_queryset(self):
+        print("USER", self.request)
+        if self.request.user == 'AnonymousUser':
+            filtered_content = Flight.objects.all()
+        else:
+            user = self.request.user
+            filtered_content = Flight.objects.filter(admin=user)
+        return filtered_content
 
 class FlightRecordViewSet(viewsets.ModelViewSet):
     queryset = FlightRecord.objects.all()
