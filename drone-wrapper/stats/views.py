@@ -2,8 +2,8 @@ from rest_framework import viewsets
 import django_filters.rest_framework
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import ReadOnly
-from .models import Flight, Deck, Drone, FlightRecord
-from .serializers import FlightSerializer, DeckSerializer, DroneSerializer, FlightRecordSerializer
+from .models import Flight, Drone, FlightRecord
+from .serializers import FlightSerializer, DroneSerializer, FlightRecordSerializer
 
 
 class DroneViewSet(viewsets.ModelViewSet):
@@ -20,14 +20,6 @@ class DroneViewSet(viewsets.ModelViewSet):
         else:
             filtered_content = Drone.objects.all()
         return filtered_content
-
-
-
-
-class DeckViewSet(viewsets.ModelViewSet):
-    queryset = Deck.objects.all()
-    serializer_class = DeckSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class FlightViewSet(viewsets.ModelViewSet):

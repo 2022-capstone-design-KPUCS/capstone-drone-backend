@@ -10,12 +10,9 @@ from .users.views import UserViewSet
 
 router = DefaultRouter()
 router.register(r'flights', FlightViewSet)
-router.register(r'decks', DeckViewSet)
 router.register(r'drones', DroneViewSet)
 router.register(r'flightrecords', FlightRecordViewSet)
 router.register(r'user', UserViewSet)
-
-
 
 
 urlpatterns = [

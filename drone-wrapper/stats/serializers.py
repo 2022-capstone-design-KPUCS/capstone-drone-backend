@@ -1,14 +1,6 @@
 from rest_framework import serializers
 
-from .models import Flight, Deck, Drone, FlightRecord
-
-class DeckSerializer(serializers.ModelSerializer):
-    def create(self, validated_data):
-        return Deck.objects.create(**validated_data)
-
-    class Meta:
-        model = Deck
-        fields = '__all__'
+from .models import Flight, Drone, FlightRecord
 
 class FlightRecordSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
@@ -36,10 +28,8 @@ class DroneSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        drone_alias = validated_data['drone_alias'].lower()
-        deck_name = "".join([drone_alias, '-deck'])
-        Deck.objects.create(deck_name=deck_name, is_occupied=False)
-        validated_data['deck'] = Deck.objects.get(deck_name=deck_name)
+        Flight.objects.create(flight_path="", admin=self.context['request'].user)
+        validated_data['flight'] = Flight.objects.get(admin=self.context['request'].user)
         validated_data['admin'] = self.context['request'].user
         drone = Drone.objects.create(**validated_data)
         return drone
